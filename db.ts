@@ -1,17 +1,18 @@
-import mysql from 'mysql2/promise';
+import mysql from 'mysql2/promise'
 
-async function init() {
+export async function init() {
     const db = await mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "root",
-        database: "mercado"
-    });
-
-    await db.connect();
-    console.log("Connected!");
-    return db
+        host: 'localhost',
+        user: 'root',
+        password: 'root',
+        database: 'mercado'
+    })
+    try {
+        await db.connect()
+        console.log('conectado ao banco :)')
+        return db
+    } catch (error) {
+        console.error('falha ao connectar ao banco',error)
+        throw error
+    }
 }
-
-
-export default init
